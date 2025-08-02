@@ -1,10 +1,8 @@
 import { useSignalEffect } from '@preact/signals';
-import { createContext, render } from 'preact';
+import { render } from 'preact';
 
-import { useContext, useEffect, useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import './style.css';
-
-export const Countries = createContext(null);
 
 async function getCountries() {
 	const res = await fetch('https://flags-be:1234/countries');
@@ -15,18 +13,15 @@ async function getCountries() {
 	}
 }
 
-function Flag({ svg }) {
+function Flag({ name, svg }) {
 	const [correct, setCorrect] = useState(false);
-	const { countries } = useContext(Countries);
 
 	function onGuessInput(e) {
 		const guess = e.target.value;
 		setCorrect(
-			countries.findIndex(country => {
-				country.name.en.findIndex(name => 
-					name === guess.toLowerCase()
-				) !== -1;
-			}) !== -1
+			name.en.findIndex(name => 
+				name === guess.toLowerCase()
+			) !== -1
 		);
 	}
 
@@ -55,11 +50,9 @@ export function App() {
 	}, []);
 
 	return (
-		<Countries.Provider value={{ countries, setCountries }}>
-			<div id="app">
-				{countries.map(country => <Flag svg={country.flag} /> )}
-			</div>
-		</Countries.Provider>
+		<div id="app">
+			{countries.map(country => <Flag name={country.meta.name} svg={country.flag} /> )}
+		</div>
 	);
 }
 
