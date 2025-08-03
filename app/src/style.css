@@ -4,8 +4,8 @@
 	width: calc(25% - 17px);
 }
 
-.flag .input {
-	margin: 0 -15px;
+.flag .svg {
+	margin-bottom: 60px;
 }
 
 .flag img {

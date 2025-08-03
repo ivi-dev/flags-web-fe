@@ -24,12 +24,12 @@ export default function Flag({ name, svg }) {
 	}
 
 	return (
-		<div className={`col-3 border border-3 rounded p-3 pb-0 me-3 flag ` +
+		<div className={`col-3 border border-3 rounded p-3 pb-0 me-3 position-relative flag ` +
 			            `${correct ? 'bg-success-subtle border-success' : ''}`}>
-			<div className="row justify-content-center mb-4">
+			<div className="row justify-content-center svg">
 				<img src={`data:image/svg+xml;base64,${svg}`} className="col-10" />
 			</div>
-			<div className="row input">
+			<div className="row col-12 position-absolute bottom-0 start-0 ms-0 input">
 				{countryNameInputOuput()}
 			</div>
 		</div>
