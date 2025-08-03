@@ -20,7 +20,7 @@ export default function Flag({ name, svg }) {
 	function countryNameInputOuput() {
 		return !correct ? 
 			   <input type="text" 
-			   		  placeholder="Which country is this?" 
+			   		  placeholder="Which country owns this flag?" 
 			   		  onInput={onGuessInput} 
 			   		  className="col-12 border-0 p-2 text-center bg-transparent" 
 			   /> : 
