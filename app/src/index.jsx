@@ -5,7 +5,7 @@ import { useEffect, useState } from 'preact/hooks';
 import './style.css';
 
 async function getCountries() {
-	const res = await fetch('https://flags-be:1234/countries');
+	const res = await fetch('http://localhost:3000/countries/all');
 	if (res.ok) {
 		return await res.json();
 	} else {
@@ -15,20 +15,36 @@ async function getCountries() {
 
 function Flag({ name, svg }) {
 	const [correct, setCorrect] = useState(false);
+	const [countryName, setCountryName] = useState('');
 
 	function onGuessInput(e) {
 		const guess = e.target.value;
-		setCorrect(
-			name.en.findIndex(name => 
-				name === guess.toLowerCase()
-			) !== -1
+		const countryNameIdx = name.en.findIndex(name => 
+			name.toLowerCase() === guess.toLowerCase()
 		);
+		setCorrect(countryNameIdx !== -1);
+		setCountryName(name.en[countryNameIdx]);
+	}
+
+	function countryNameInputOuput() {
+		return !correct ? 
+			   <input type="text" 
+			   		  placeholder="Which country is this?" 
+			   		  onInput={onGuessInput} 
+			   		  className="col-12 border-0 p-2 text-center bg-transparent" 
+			   /> : 
+			   <h4 className="text-center">{countryName}</h4>;
 	}
 
 	return (
-		<div className={`flag ${correct ? 'correct' : ''}`}>
-			<img src={`data:image/svg+xml;base64,${svg}`} />
-			<input type="text" onInput={onGuessInput} />
+		<div className={`col-3 border border-3 rounded p-3 pb-0 me-3 flag ` +
+			            `${correct ? 'bg-success-subtle border-success' : ''}`}>
+			<div className="row justify-content-center mb-4">
+				<img src={`data:image/svg+xml;base64,${svg}`} className="col-10" />
+			</div>
+			<div className="row input">
+				{countryNameInputOuput()}
+			</div>
 		</div>
 	);
 }
@@ -51,7 +67,11 @@ export function App() {
 
 	return (
 		<div id="app">
-			{countries.map(country => <Flag name={country.meta.name} svg={country.flag} /> )}
+			<div className="row g-3 p-3">
+				{countries.map(country => 
+					<Flag name={country.meta.name} svg={country.flag} /> 
+				)}
+			</div>
 		</div>
 	);
 }
