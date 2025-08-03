@@ -13,6 +13,10 @@ export default function Flag({ name, svg }) {
 		setCountryName(name.en[countryNameIdx]);
 	}
 
+    function dynamicClasses() {
+        return correct ? 'bg-success-subtle border-success' : '';
+    }
+
 	function countryNameInputOuput() {
 		return !correct ? 
 			   <input type="text" 
@@ -24,8 +28,8 @@ export default function Flag({ name, svg }) {
 	}
 
 	return (
-		<div className={`col-3 border border-3 rounded p-3 pb-0 me-3 position-relative flag ` +
-			            `${correct ? 'bg-success-subtle border-success' : ''}`}>
+		<div className={`border border-3 rounded p-3 pb-0 ` +
+                        `position-relative flag ${dynamicClasses()}`}>
 			<div className="row justify-content-center svg">
 				<img src={`data:image/svg+xml;base64,${svg}`} className="col-10" />
 			</div>
