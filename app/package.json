@@ -8,7 +8,9 @@
 	},
 	"dependencies": {
 		"@preact/signals": "^2.2.1",
-		"preact": "^10.25.3"
+		"bootstrap": "^5.3.7",
+		"preact": "^10.25.3",
+		"sass-embedded": "^1.89.2"
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.9.3",
