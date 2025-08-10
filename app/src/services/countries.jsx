@@ -1,5 +1,5 @@
 export async function getCountries() {
-    const res = await fetch('http://localhost:3000/countries/all');
+    const res = await fetch('https://localhost:444/api/countries/all');
     if (res.ok) {
         return await res.json();
     } else {
