@@ -20,7 +20,7 @@ export default function App() {
 		<div id="app">
 			<div className="row g-3 p-3 ps-4">
 				{countries.map(country => 
-					<Flag name={country.meta.name} svg={country.flag} /> 
+					<Flag country={country} /> 
 				)}
 			</div>
 		</div>
